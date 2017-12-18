@@ -1,10 +1,7 @@
 'use strict'
 
-import { Storage } from './storage'
-
-function NavView (parent) {
-  this.parent = parent
-  this.storage = Storage
+function NavView (container) {
+  this.parent = container
   this.render = () => {
     let div = document.createElement('div')
     div.style.height = '100vh'
@@ -15,7 +12,13 @@ function NavView (parent) {
       this.storage.mode = 'EditBlog'
     })
     div.appendChild(btn1)
-    parent.appendChild(div)
+    let btn2 = document.createElement('button')
+    btn2.innerText = 'Super moode'
+    btn2.addEventListener('click', (e) => {
+      this.storage.changeMode()
+    })
+    div.appendChild(btn2)
+    container.appendChild(div)
     return div
   }
   this.mainView = (blogs) => {

@@ -12,11 +12,15 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 public class Controller {
 
     @Autowired
-    BlogRepository cdb;
+    BlogRepository bdb;
+    @Autowired
+    CommentRepository cdb;
+    @Autowired
+    AuthorRepository adb;
 
     @RequestMapping(value="/blog", method= GET)
     public Iterable<Blog> getBlogs() {
-        return cdb.findAll();
+        return bdb.findAll();
     }
 
     @RequestMapping(value="/blog/{id}", method= GET)
@@ -37,12 +41,14 @@ public class Controller {
     @RequestMapping(value="/blog", method = POST)
     public Blog postBlog(@RequestBody Blog blog) {
         Blog b = blog;
-        Blog s = cdb.save(b);
+        Blog s = bdb.save(b);
         return s;
     }
 
     @RequestMapping(value="/comment", method = POST)
-    public Blog postComment(Blog blog) {
-        return blog;
+    public Comment postComment(@RequestBody Comment comment) {
+        Comment c = comment;
+        Comment o = cdb.save(c);
+        return o;
     }
 }

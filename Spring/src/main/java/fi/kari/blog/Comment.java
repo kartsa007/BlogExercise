@@ -8,8 +8,12 @@ public class Comment {
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
     String comment;
+
     @ManyToOne
     Blog blog;
+
+    @ManyToOne
+    Author author;
 
     public Comment() {
     }
@@ -37,4 +41,13 @@ public class Comment {
     public void setBlog(Blog blog) {
         this.blog = blog;
     }
+
+    public Author getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(Author author) {
+        this.author = author;
+    }
+
 }

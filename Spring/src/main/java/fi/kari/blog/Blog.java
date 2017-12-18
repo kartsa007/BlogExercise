@@ -15,9 +15,13 @@ public class Blog {
     @OneToMany(mappedBy="blog")
     private Set<Comment> comments;
 
+    @ManyToOne(cascade=CascadeType.ALL)
+    private Author author;
+
     public Blog(String header, String text) {
         this.header = header;
         this.text = text;
+        this.author = author;
     }
 
     public Blog() {
@@ -61,5 +65,13 @@ public class Blog {
 
     public void setComments(Set<Comment> comments) {
         this.comments = comments;
+    }
+
+    public Author getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(Author author) {
+        this.author = author;
     }
 }

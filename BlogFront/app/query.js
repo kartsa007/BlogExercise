@@ -1,5 +1,5 @@
 'use strict'
-import { Storage } from './storage'
+import { storage } from './storage'
 
 function queryBlogs () {
 
@@ -18,32 +18,60 @@ function queryBlogs () {
       return response.json()
     }).then((data) => {
       if (data) {
-        Storage.blogs = data
+        storage.blogs = data
       }    
     })
 }
 
-function postBlog () {
+function postBlog (blog) {
+
+  blog.date = new Date().toISOString()
   let headers = new Headers()
   headers.append('Content-Type', 'application/json')
   headers.append('Accept', '*/*')
   console.log(headers)
   // Display the key/value pairs
   for (var pair of headers.entries()) {
-    console.log(pair[0] + ': ' + pair[1]);
+    console.log(pair[0] + ': ' + pair[1])
   }
-  let url = '/blogs'
+  let url = '/blog'
   let init = {
     method: 'post',
     headers: headers,
-    body: JSON.stringify({
-      text: 'Tesi',
-      header: 'blogheader',
-      author: 'Jussi'
-    })
+    body: JSON.stringify(blog)
   }
   fetch(url, init)
-    .then(responseOk).then(responseJsonData)
+    .then((response) => {
+      console.log('Got response to Blog post')
+      return response.json()
+    }).then((data) => {
+      console.log('Got data' + data)
+      blog.id = data.id
+    })
 }
 
-export { queryBlogs, postBlog }
+function postComment(comment) {
+  let headers = new Headers()
+  headers.append('Content-Type', 'application/json')
+  headers.append('Accept', '*/*')
+  console.log(headers)
+  // Display the key/value pairs
+  for (var pair of headers.entries()) {
+    console.log(pair[0] + ': ' + pair[1])
+  }
+  let url = '/comment'
+  let init = {
+    method: 'post',
+    headers: headers,
+    body: JSON.stringify(comment)
+  }
+  fetch(url, init)
+    .then((response) => {
+      console.log('Got response to Blog post')
+      return response.json()
+    }).then((data) => {
+      console.log('Got data' + data)
+      comment.id = data.id
+    })
+}
+export { queryBlogs, postBlog, postComment }
