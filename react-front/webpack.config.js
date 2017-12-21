@@ -1,27 +1,28 @@
 const path = require('path')
-var loaders = require('./webpack.loaders');
+//var loaders = require('./webpack.loaders');
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const CleanWebpackPlugin = require('clean-webpack-plugin')
+//const CleanWebpackPlugin = require('clean-webpack-plugin')
 module.exports = {
-  entry: './src/index.jsx',
+  entry: './src/index2.js',
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'dist')
   },
   devtool: 'inline-source-map',
-/*  devServer: {
+  devServer: {
     hot: true
-  },*/
+  },
   plugins: [
-//    new CleanWebpackPlugin(['dist']),
-//    new HtmlWebpackPlugin({
-//      title: 'Output Management'
-//    })
+    //    new CleanWebpackPlugin(['dist']),
+    new HtmlWebpackPlugin({
+      title: 'Blog exercise',
+      template: 'src/index.html'
+    })
   ],
-    module : {
-        loaders: [
+  module: {
+    loaders: [
       { test: /\.js$/, loader: 'babel-loader', exclude: /node_modules/ },
-            { test: /\.jsx$/, loader: 'babel-loader', exclude: /node_modules/ },
+      { test: /\.jsx$/, loader: 'babel-loader', exclude: /node_modules/ },
       {
         test: /\.css$/,
         use: [

@@ -1,0 +1,3 @@
+curl -v -X POST -d '{"author": {"name":"kari"}, "header":"Petosta", "text":"Kepu pettää aina"}' -H "Content-Type: application/json" http://localhost:8080/blog
+
+{author: {name: "Kari"}, header: "Joulu on tulossa", text: "sfsj↵sdfj↵sfh↵",…}

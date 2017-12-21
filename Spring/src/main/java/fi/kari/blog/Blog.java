@@ -18,12 +18,6 @@ public class Blog {
     @ManyToOne(cascade=CascadeType.ALL)
     private Author author;
 
-    public Blog(String header, String text) {
-        this.header = header;
-        this.text = text;
-        this.author = author;
-    }
-
     public Blog() {
     }
 
