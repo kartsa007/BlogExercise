@@ -1,0 +1,69 @@
+FrontEnd-kurssin Full Stack-projektin palautus
+
+1) Suunnitelma:
+
+Tarkoitus oli toteuttaa Blogi-sivusto. Blogistit luovat
+käyttäjätunnukset ja kirjautumalla tunniksillaan voivat
+luoda uusia blogeja. Blogeja voi myös kommentoida. Kommentointi
+edellyttää kirjautumista. Ylikäyttäjä voi moderoida blogeja ja kommentteja.
+Tavallinen, kirjautumaton, käyttäjä voi selailla blogeja ja
+kommentointia.
+
+1.1. Ohjelmiston rakenne
+
+Front tehdään SinglePage-soveluksena Reactilla ja Reduxilla.
+Backend koostuu Rest-palvelimesta, joka tarjoaa rajapinnan
+käyttäjien, blogien ja kommenttien käsittelyyn, sekä palvelimesta
+joka käsittelee staattiset pyynnöt ja välittää Rest-pyynnöt
+Rest-palvelimelle. Rest-palvelin toteutetaan Spring Bootilla ja
+proxy Node-expressillä.
+
+2. Mitä tapahtui?
+
+2.1 Rest-backend
+
+Vaikka kyse on yksinkertaisesta tietokannasta (3 taulua),
+suunnittelu piti tehdä pariin kertaan. Ohjelmakehitykseen
+kokeiltiin sekä IntelliJ Idean Ultimate versiota ja Netbeansia
+höystettynä Spring-pluginilla. Virheilmoitusten vaikeaselkoisuus
+noviisille tuotti jonkin verran ongelmia. Kokemusten ohjaamana
+toteutuksessa päätettiin lähteä pure-SQL-suuntaan, lähinnä Springin
+mahdollistaman korkean absraktion ja automaation peittämien toimintojen
+aiheuttamien ongelmien vuoksi. Lisäksi annotaatio-dokumentaation
+omaksuminen tehtävän aikarajoissa kävi mahdottomaksi.
+
+Eli saatu oppi on, että Netbeansin kanssa pärjäsi paremmin kuin
+Idea ja mitään hifiä ei kannata ekaksi käyttää.
+
+Ja tilanne tietokannan ja Springin osalta on: tekemättä vaille valmis.
+
+2.2 Express proxy
+
+Kokeilin kaikkea hienoa ja lopulta totesin turhaksi. Hienoa olivat
+expressin dev-server hot-featurella: hokaa automaattisesti lähdekoodin
+muutokset, tekee päivitykset ja varmaan infoaa fronttiakin ja päivittää
+näkymää. Päädyin lopulta riisumaan ylimääräiset pois. Jäljelle jäi
+proxy-rest pyynnöille (vältetään cors-ongelmat) ja staattisten tietojen
+palvelin (index.html ja javascript-koodit bundle.js:ssä).
+
+Toistaiseksi rest-pyynnöt eivät tunnu menevän perille, muuten OK
+
+2.3 Front
+
+Fronttia tehtiin aluksi create-reactilla, mutta heti kun pääsin
+alkuun huomasin, että tarvitsen webpackin ja babelin. Samalla reactin
+omat skriptit piti unohtaa. Nämä ehtivät kuintenkin istuttaa
+selaimeen ServiceWorkerin. Webpackin, babelin ja ServiceWorkerin
+disablointiin menikin pääosa frontin kehityspanoksesta.
+
+Alkuperäisen suunnitelman mukaisen Reduxin käyttöönottoon en
+ehtinyt paneutua ollenkaan.
+
+3. Yhteenveto
+
+FullStack-projektista opin paljon vaikka mitään toimivaa ei ole toistaiseksi
+olemassa. Tarkoitus on kuitenkin jatkaa tehtävää eteenpäin
+kun käsittääkseni kehitysynpäristöjen suurimmat ongelmat on nyt selvitetty.
+
+BlogExercise:n kehitystä voi seurata osoitteessa:
+https://github.com/kartsa007/BlogExercise

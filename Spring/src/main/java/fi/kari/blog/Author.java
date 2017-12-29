@@ -6,31 +6,42 @@ import java.util.Set;
 @Entity
 public class Author {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long Id;
-    @Column(unique=true)
-    private String name;
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  private Long id;
+  @Column(unique=true)
+  private String name;
+  private String passwd;
+  private String userRole;
 
-    public Author(String name) {
-        this.name = name;
-    }
+  public Author() {
+  }
 
-    public long getId() {
-        return Id;
-    }
+  public Author(String name) {
+    this.name = name;
+  }
 
-    public void setId(long id) {
-        Id = id;
-    }
+  public long getId() {
+    return id;
+  }
 
-    public String getName() {
-        return name;
-    }
+  public void setId(long id) {
+    this.id = id;
+  }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+  public String getName() {
+    return name;
+  }
 
+  public void setName(String name) {
+    this.name = name;
+  }
 
+  public String getUserRole() {
+    return userRole;
+  }
+
+  public void setUserRole(String userRole) {
+    this.userRole = userRole;
+  }
 }

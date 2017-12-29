@@ -3,6 +3,9 @@ package fi.kari.blog;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.NoResultException;
 import javax.ws.rs.Consumes;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
@@ -17,6 +20,48 @@ public class Controller {
     CommentRepository cdb;
     @Autowired
     AuthorRepository adb;
+
+    @Autowired
+    private EntityManagerFactory entityManagerFactory;
+
+    @RequestMapping(value="/signin", method= POST)
+    public Author signIn(@RequestBody Login inp) {
+      EntityManager session = entityManagerFactory.createEntityManager();
+      try {
+        String query = "select * FROM author WHERE NAME=:name";
+        Author author = (Author)session.createNativeQuery(query)
+          .setParameter("name", inp.getName())
+          .getSingleResult();
+        
+        return null;
+      }
+      catch (NoResultException e){
+        return null;
+      }
+      finally {
+        if(session.isOpen()) session.close();
+      }
+    }
+
+    @RequestMapping(value="/signup", method= POST)
+    public Login signUp(@RequestBody Login inp) {
+      EntityManager session = entityManagerFactory.createEntityManager();
+      try {
+        String query = "select  * FROM author WHERE NAME=:name";
+        Author author = (Author)session.createNativeQuery(query)
+          .setParameter("name", inp.getName())
+          .getSingleResult();
+        inp.setStatus("ok");
+        return inp;
+      }
+      catch (NoResultException e){
+        inp.setStatus("Käyttäjää ei ole olemassa");
+        return inp;
+      }
+      finally {
+        if(session.isOpen()) session.close();
+      }
+    }
 
     @RequestMapping(value="/blog", method= GET)
     public Iterable<Blog> getBlogs() {

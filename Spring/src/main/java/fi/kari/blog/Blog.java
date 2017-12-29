@@ -12,11 +12,9 @@ public class Blog {
     private String header;
     private String text;
     private Date date;
+    private Long authorId;
     @OneToMany(mappedBy="blog")
     private Set<Comment> comments;
-
-    @ManyToOne(cascade=CascadeType.ALL)
-    private Author author;
 
     public Blog() {
     }
@@ -61,11 +59,11 @@ public class Blog {
         this.comments = comments;
     }
 
-    public Author getAuthor() {
-        return author;
+    public Long getAuthorId() {
+        return authorId;
     }
 
-    public void setAuthor(Author author) {
-        this.author = author;
+    public void setAuthorId(Long authorId) {
+        this.authorId = authorId;
     }
 }
