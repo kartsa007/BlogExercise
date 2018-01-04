@@ -2,18 +2,43 @@ import React, { Component } from 'react'
 
 export class Navigation extends Component {
  render() {
+    if (this.props.view === 'SignIn' ||
+    this.props.view == 'SignUp') {
+      return(<div></div>)
+    }
     console.log(this.props)
-    return (
-      <nav style={{ width: '30%', backgroundColor: 'grey' }}>
-        <div>
-          <button onClick={() => {this.props.action('Super', 'Blogi näkymä')}}>Super Mode</button>
-        </div>
-        <div>
-          <button onClick={() => {this.props.action('Edit', 'Blogi näkymä')}}>
-          {this.props.button2Text}
-          </button>
-        </div>
-      </nav>
-    )
+    if (this.props.user) {
+      return (
+        <nav style={{width: '30%', backgroundColor: 'grey'}}>
+          <div>
+            Kirjautuneena: {this.props.user.name}
+          </div>
+          <div>
+            <button onClick={() => {
+              this.props.actions.editBlog()
+            }}>
+              Uusi blogikirjoitus
+            </button>
+          </div>
+        </nav>
+      )
+    } else {
+      return (
+        <nav style={{width: '30%', backgroundColor: 'grey'}}>
+          <div>
+            <button onClick={() => {
+              this.props.actions.signIn()
+            }}>Kirjaudu
+            </button>
+            <div>
+              <button onClick={() => {
+              this.props.actions.signUp()
+             }}>Luo käyttäjätunnus
+              </button>
+            </div>
+          </div>
+        </nav>
+      )
+   }
   }
 }

@@ -12,7 +12,8 @@ public class Blog {
     private String header;
     private String text;
     private Date date;
-    private Long authorId;
+    private String author;
+
     @OneToMany(mappedBy="blog")
     private Set<Comment> comments;
 
@@ -51,6 +52,13 @@ public class Blog {
         this.date = date;
     }
 
+  public String getAuthor() {
+    return author;
+  }
+
+  public void setAuthor(String author) {
+    this.author = author;
+  }
     public Set<Comment> getComments() {
         return comments;
     }
@@ -59,11 +67,4 @@ public class Blog {
         this.comments = comments;
     }
 
-    public Long getAuthorId() {
-        return authorId;
-    }
-
-    public void setAuthorId(Long authorId) {
-        this.authorId = authorId;
-    }
 }

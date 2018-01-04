@@ -23,3 +23,8 @@ hs_err_pid*
 
 # Emacs
 *~
+
+.idea
+.vscode
+.tern*
+.mvn

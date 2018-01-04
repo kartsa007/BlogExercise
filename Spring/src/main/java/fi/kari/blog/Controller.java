@@ -3,10 +3,7 @@ package fi.kari.blog;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.NoResultException;
-import javax.ws.rs.Consumes;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
@@ -26,41 +23,35 @@ public class Controller {
 
     @RequestMapping(value="/signin", method= POST)
     public Author signIn(@RequestBody Login inp) {
-      EntityManager session = entityManagerFactory.createEntityManager();
-      try {
-        String query = "select * FROM author WHERE NAME=:name";
-        Author author = (Author)session.createNativeQuery(query)
-          .setParameter("name", inp.getName())
-          .getSingleResult();
-        
-        return null;
+      Author a1 = adb.findByName(inp.getName());
+      if (a1 == null) {
+        inp.setStatus("Käyttäjää ei ole olemassa");        
+      } else {
+        if (inp.getPasswd().equals(a1.getPasswd())) {
+          inp.setStatus("ok");
+        } else {
+          inp.setStatus("failed");
+        }      
       }
-      catch (NoResultException e){
-        return null;
-      }
-      finally {
-        if(session.isOpen()) session.close();
-      }
+      a1.setPasswd("****");
+      return a1;
     }
 
     @RequestMapping(value="/signup", method= POST)
     public Login signUp(@RequestBody Login inp) {
-      EntityManager session = entityManagerFactory.createEntityManager();
-      try {
-        String query = "select  * FROM author WHERE NAME=:name";
-        Author author = (Author)session.createNativeQuery(query)
-          .setParameter("name", inp.getName())
-          .getSingleResult();
+      Author a1 = adb.findByName(inp.getName());
+      if (a1 == null) {
+        Author author = new Author(inp.getName());
+        author.setUserRole("user");
+        author.setPasswd(inp.getPasswd());
+        adb.save(author);
         inp.setStatus("ok");
-        return inp;
+        inp.setPasswd("*****");
+      } else {
+        inp.setStatus("Already exists");
+        inp.setPasswd("*****");
       }
-      catch (NoResultException e){
-        inp.setStatus("Käyttäjää ei ole olemassa");
-        return inp;
-      }
-      finally {
-        if(session.isOpen()) session.close();
-      }
+      return inp;
     }
 
     @RequestMapping(value="/blog", method= GET)
@@ -69,31 +60,27 @@ public class Controller {
     }
 
     @RequestMapping(value="/blog/{id}", method= GET)
-    public String getBlog(@PathVariable() long id) {
-        return "Get block" + id;
+    public Blog getBlog(@PathVariable() long id) {
+        return bdb.findOne(id);
     }
 
     @RequestMapping(value="/blog/{id}/comment", method= GET)
-    public String getBlogComments(@PathVariable() long id) {
-        return "Get comments of " + id;
+    public Comment getBlogComments(@PathVariable() long id) {
+      return cdb.findOne(id);
     }
 
     @RequestMapping(value="/blog/{blogId}/comment/{commentId}", method= GET)
     public String getBlogComment(@PathVariable() long blogId, @PathVariable() long commentId) {
-        return "Get comment " + commentId +  " of blog " + blogId;
+      return "Get comment " + commentId +  " of blog " + blogId;
     }
 
     @RequestMapping(value="/blog", method = POST)
     public Blog postBlog(@RequestBody Blog blog) {
-        Blog b = blog;
-        Blog s = bdb.save(b);
-        return s;
+      return bdb.save(blog);
     }
 
     @RequestMapping(value="/comment", method = POST)
     public Comment postComment(@RequestBody Comment comment) {
-        Comment c = comment;
-        Comment o = cdb.save(c);
-        return o;
+      return cdb.save(comment);
     }
 }

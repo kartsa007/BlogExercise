@@ -1,3 +1,4 @@
 curl -v  http://localhost:8080/blog
+curl -v  http://localhost:8080/author
 curl -v -X POST -d '{"name": "jussi", "passwd":"jussi"}' -H "Content-Type: application/json" http://localhost:8080/signup
-curl -v -X POST -d '{"authorId": "1", "header":"Petosta", "text":"Kepu pettää aina"}' -H "Content-Type: application/json" http://localhost:8080/blog
+curl -v -X POST -d '{"author": "kari", "header":"Petosta", "text":"Kepu pettää aina"}' -H "Content-Type: application/json" http://localhost:8080/blog

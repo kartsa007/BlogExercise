@@ -1,4 +1,6 @@
-function queryBlogs () {
+import { Storage } from './Storage'
+
+function queryBlogs (okResponse, errResponse) {
   
     let headers = new Headers()
     headers.append('Content-Type', 'application/json')
@@ -14,9 +16,7 @@ function queryBlogs () {
         console.log('got response')
         return response.json()
       }).then((data) => {
-        if (data) {
-  //          storage.blogs = data
-        }    
+        okResponse(data)
       })
   }
   
@@ -71,5 +71,24 @@ function queryBlogs () {
         comment.id = data.id
       })
   }
-  export { queryBlogs, postBlog, postComment }
+  
+  function postData(url, data, ok, err) {
+    let headers = new Headers()
+    headers.append('Content-Type', 'application/json')
+    headers.append('Accept', '*/*')
+    let init = {
+      method: 'post',
+      headers: headers,
+      body: JSON.stringify(data)
+    }
+    fetch(url, init)
+      .then((response) => {
+        console.log('Got response to Login post')
+        return response.json()
+      }).then((data) => {
+        ok(data)
+      })
+  }
+
+  export { queryBlogs, postBlog, postComment, postData }
   
