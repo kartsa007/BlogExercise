@@ -1,25 +1,20 @@
-	import React, { Component } from 'react'
+import React from 'react'
+import { PropTypes } from 'prop-types'
+import { Comments } from './Comments'
 
-	export class Blog extends Component {
+export class Blog extends React.Component {
 
-		doContent(blog, editable) {
-			let content = []
-			content.push(<h2 contnenteditable={editable}>{blog.header}</h2>)
-			content.push(<div contenteditable={editable}>
-				{blog.text}
-				</div>)
-			if (editable) {
-				content.push(<button onClick={(e) => {
-					this.props.actions.addBlog(this.blog)
-				}}>Luo blogiteksti</button>)
-			}
-			return content
-		}
+  render() {
+    return (
+      <div>
+        <h2>{this.props.blog.header}</h2>
+        <div>{this.props.blog.text}</div>
+        <div>By {this.props.blog.author}</div>
+        <Comments comment={this.props.blog.comments}/>
+      </div>)
+  }
+}
 
-		render() {
-			return (
-				<div>
-					{this.doContent(this.props.blog, this.props.edit)}
-				</div>)
-		}
-	}
+Blog.propTypes = {
+  blog: PropTypes.object
+}
