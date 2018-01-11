@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { PropTypes } from 'prop-types'
 import { SignStatus } from './SignStatus'
 import { postData } from './Query'
 
@@ -25,7 +26,14 @@ export class SignInUp extends Component {
   }
 
   okResponse(response) {
-    this.props.actions.signedIn(response)
+    if (response.status === 'ok') {
+      this.props.actions.signedIn(response) 
+    } else {
+      this.errText = 'Kirjautuminen epäonnistui'
+      this.userName.value = ''
+      this.passwd.value = ''
+      this.setState({})
+    }
   }
 
   errresponse(response) {
@@ -33,8 +41,8 @@ export class SignInUp extends Component {
   }
 
   render() {
-		return (
-			<div>
+    return (
+      <div>
         <form onSubmit={(e) => {
           e.preventDefault()
           if (this.userResponse()) {
@@ -45,15 +53,30 @@ export class SignInUp extends Component {
           }
         }}>
 				Käyttäjätunnus:
-        <input type='text' ref={(input) => {
-          this.userName = input
-        }}/>
+          <input type='text' ref={(input) => {
+            this.userName = input
+          }} onInput={() => {
+            if (this.errText) {
+              delete this.errText
+              this.setState({})
+            }
+          }}/>
         Salasana:
-        <input type='password' ref={(input) => {
-          this.passwd = input
-        }}/>
-          <SignStatus errTxt={this.errText} buttonText={this.props.buttonText}/>
+          <input type='password' ref={(input) => {
+            this.passwd = input
+          }} onInput={() => {
+            if (this.errText) {
+              delete this.errText
+              this.setState({})
+            }
+          }}/>
+          <SignStatus status={this.status} errText={this.errText} buttonText={this.props.buttonText}/>
         </form>
-			</div>)
-	}
+      </div>)
+  }
+}
+
+SignInUp.propTypes = {
+  url: PropTypes.string.isRequired,
+  actions: PropTypes.object.isRequired
 }

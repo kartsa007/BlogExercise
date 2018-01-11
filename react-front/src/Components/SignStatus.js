@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { postSignIn } from './Query'
+import { PropTypes } from 'prop-types'
 import img from '../../public/ajax-loader.gif'
 
 export class SignStatus extends Component {
@@ -24,9 +24,15 @@ export class SignStatus extends Component {
       )
   
     }
-		return (
-			<div>
+    return (
+      <div>
         <button type='submit'>{this.props.buttonText}</button>
-			</div>)
-	}
+      </div>)
+  }
+}
+
+SignStatus.propTypes = {
+  errText: PropTypes.text,
+  status: PropTypes.boolean,
+  buttonText: PropTypes.text
 }

@@ -6,14 +6,18 @@ export class EditComment extends Component {
     return (
       <div>
         <h3>Kommentoi</h3>
-        <textarea />
-        <button onClick={this.props.onClick}>Lähetä kommenttisi</button>
+        <textarea onBlur={(e) => {
+          this.comment = e.target.value
+        }}/>
+        <button onClick={() => {
+          this.props.commit(this.comment)
+        }}>Lähetä kommenttisi</button>
       </div>)
   }
 }
 
 EditComment.propTypes = {
-  onClick: PropTypes.func
+  commit: PropTypes.func
 }
 
 

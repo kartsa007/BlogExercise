@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { Blog } from './Blog'
 import { postData } from './Query'
 import { Storage } from './Storage'
@@ -15,32 +16,35 @@ export class EditBlog extends Component {
   }
 
   render() {
-		return (
-			<div>
+    return (
+      <div>
         <div>
         Otsikko:
-        <br/>
-        <input type='text' 
-          onInput={(e) => {
-            this.blog.header = e.target.value
-            this.setState({})}}/>
-        <br/>
+          <br/>
+          <input type='text' 
+            onInput={(e) => {
+              this.blog.header = e.target.value
+              this.setState({})}}/>
+          <br/>
         Blogiteksti
-        <br/>
-        <textarea 
-          onInput={(e) => {
-            this.blog.text = e.target.value
-            this.setState({})}}/>
-        <br/>
-        <button onClick={
-          (e) => {
-            this.blog.authorId = Storage.user.id
-            this.blog.date = new Date().toISOString()
-            postData('/blog', this.blog, this.okResponse)
-          }
-        }>Talleta</button>
+          <br/>
+          <textarea 
+            onInput={(e) => {
+              this.blog.text = e.target.value
+              this.setState({})}}/>
+          <br/>
+          <button onClick={
+            () => {
+              this.blog.author = Storage.user.name
+              this.blog.date = new Date().toISOString()
+              postData('/blog', this.blog, () => this.okResponse())
+            }
+          }>Talleta</button>
         </div>
-        <Blog blog={this.blog}/>
-			</div>)
-	}
+      </div>)
+  }
+}
+
+EditBlog.propTypes = {
+  actions: PropTypes.object
 }

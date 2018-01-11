@@ -5,7 +5,8 @@ public class Login {
   private String name;
   private String passwd;
   private String status;
-
+  private Long id;
+  
   public Login() {
   }
 
@@ -30,11 +31,20 @@ public class Login {
     this.passwd = passwd;
   }
 
-    public String getStatus() {
-        return status;
-    }
+  public String getStatus() {
+    return status;
+  }
 
-    public void setStatus(String status) {
-        this.status = status;
-    }
+  public void setStatus(String status) {
+    this.status = status;
+  }
+
+  public Long getId() {
+    return id;
+  }
+
+  public void setId(Long id) {
+    this.id = id;
+  }
+    
 }

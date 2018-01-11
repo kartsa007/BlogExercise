@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { Storage } from './Storage'
 import { EditComment } from './EditComment'
 import { Comment } from './Comment'
+import { postData } from './Query'
 
 export class Comments extends Component {
 
@@ -10,9 +11,6 @@ export class Comments extends Component {
     super(props)
     this.state = {
       edit: false
-    }
-    this.propTypes = {
-      comments: PropTypes.string.isRequired
     }
   }
 
@@ -32,7 +30,16 @@ export class Comments extends Component {
         }}>Kommentoi</button>)
     }
     if (this.state.edit) {
-      content.push(<EditComment key={key++}/>)
+      content.push(<EditComment key={key++} commit={(text) => {
+        let comment = {
+          author: Storage.user.name,
+          comment: text,
+          blog_id: this.props.blogId
+        }
+        postData('/comment', comment)
+        this.props.comments.push(comment)
+        this.setState({edit:false})
+      }}/>)
     }
     return content
   }
@@ -48,5 +55,6 @@ export class Comments extends Component {
 }
 
 Comments.propTypes = {
-  comments: PropTypes.string.isRequired
+  comments: PropTypes.array.isRequired,
+  blogId: PropTypes.number.isRequired
 }

@@ -45,19 +45,19 @@ export class NewBlog extends Component {
         <h2>Uusi Blogi</h2>
         <br />
         Otsikko:
-                <input onInput={(e) => {
+        <input onInput={(e) => {
           this.clearErr()
           this.blog.header = e.target.value
         }} />
         <br />
         Tekijä:
-                <input onInput={(e) => {
+        <input onInput={(e) => {
           this.clearErr()
           this.blog.author.name = e.target.value
         }} />
         <br />
         Blogiteksti:
-                <textarea onInput={(e) => {
+        <textarea onInput={(e) => {
           this.clearErr()
           this.blog.text = e.target.value
         }} />

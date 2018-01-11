@@ -4,50 +4,47 @@ import javax.persistence.*;
 
 @Entity
 public class Comment {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    Long id;
-    String comment;
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  private Long id;
+  private String comment;
 
-    @ManyToOne
-    Blog blog;
+  private Long blog_id;
 
-    @ManyToOne
-    Author author;
+  private String author;
 
-    public Comment() {
-    }
+  public Comment() {
+  }
 
-    public Long getId() {
-        return id;
-    }
+  public Long getId() {
+    return id;
+  }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+  public void setId(Long id) {
+    this.id = id;
+  }
 
-    public String getComment() {
-        return comment;
-    }
+  public String getComment() {
+    return comment;
+  }
 
-    public void setComment(String comment) {
-        this.comment = comment;
-    }
+  public void setComment(String comment) {
+    this.comment = comment;
+  }
 
-    public Blog getBlog() {
-        return blog;
-    }
+  public Long getBlog_id() {
+    return blog_id;
+  }
 
-    public void setBlog(Blog blog) {
-        this.blog = blog;
-    }
+  public void setBlog_id(Long blog_id) {
+    this.blog_id = blog_id;
+  }
 
-    public Author getAuthor() {
-        return author;
-    }
+  public String getAuthor() {
+    return author;
+  }
 
-    public void setAuthor(Author author) {
-        this.author = author;
-    }
-
+  public void setAuthor(String author) {
+    this.author = author;
+  }
 }

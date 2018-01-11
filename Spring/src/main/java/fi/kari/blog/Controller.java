@@ -1,5 +1,6 @@
 package fi.kari.blog;
 
+import java.util.HashSet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,19 +23,21 @@ public class Controller {
     private EntityManagerFactory entityManagerFactory;
 
     @RequestMapping(value="/signin", method= POST)
-    public Author signIn(@RequestBody Login inp) {
+    public Login signIn(@RequestBody Login inp) {
       Author a1 = adb.findByName(inp.getName());
       if (a1 == null) {
-        inp.setStatus("Käyttäjää ei ole olemassa");        
+        inp.setStatus("Käyttäjää ei ole olemassa");
       } else {
         if (inp.getPasswd().equals(a1.getPasswd())) {
           inp.setStatus("ok");
+          inp.setId(a1.getId());
+          
         } else {
           inp.setStatus("failed");
         }      
       }
-      a1.setPasswd("****");
-      return a1;
+      inp.setPasswd("****");
+      return inp;
     }
 
     @RequestMapping(value="/signup", method= POST)
@@ -65,8 +68,8 @@ public class Controller {
     }
 
     @RequestMapping(value="/blog/{id}/comment", method= GET)
-    public Comment getBlogComments(@PathVariable() long id) {
-      return cdb.findOne(id);
+    public Iterable<Comment> getBlogComments(@PathVariable() long id) {
+      return cdb.findById(id);
     }
 
     @RequestMapping(value="/blog/{blogId}/comment/{commentId}", method= GET)

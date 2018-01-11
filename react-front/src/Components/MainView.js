@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { PropTypes } from 'prop.types'
+import { PropTypes } from 'prop-types'
 import {SignInUp} from './SignInUp'
 import {Blogs} from './Blogs'
 import {EditBlog} from './EditBlog'

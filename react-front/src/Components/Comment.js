@@ -6,7 +6,7 @@ export class Comment extends Component {
   render() {
     return (
       <div>
-        <p>{this.props.comment.text}</p>
+        <p>{this.props.comment.comment}</p>
         <p>{this.props.comment.author}</p>
       </div>)
   }

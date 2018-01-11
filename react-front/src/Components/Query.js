@@ -71,6 +71,22 @@ function postComment(comment) {
       comment.id = data.id
     })
 }
+function getData(url, ok, err) {
+  let headers = new Headers()
+  headers.append('Content-Type', 'application/json')
+  headers.append('Accept', '*/*')
+  let init = {
+    method: 'get',
+    headers: headers,
+  }
+  fetch(url, init)
+    .then((response) => {
+      console.log('Got response to Login post')
+      return response.json()
+    }).then((data) => {
+      ok(data)
+    }).catch(err)
+}
   
 function postData(url, data, ok, err) {
   let headers = new Headers()
@@ -90,5 +106,5 @@ function postData(url, data, ok, err) {
     }).catch(err)
 }
 
-export { queryBlogs, postBlog, postComment, postData }
+export { queryBlogs, postBlog, postComment, postData, getData }
   

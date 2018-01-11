@@ -14,9 +14,6 @@ public class Blog {
     private Date date;
     private String author;
 
-    @OneToMany(mappedBy="blog")
-    private Set<Comment> comments;
-
     public Blog() {
     }
 
@@ -59,12 +56,4 @@ public class Blog {
   public void setAuthor(String author) {
     this.author = author;
   }
-    public Set<Comment> getComments() {
-        return comments;
-    }
-
-    public void setComments(Set<Comment> comments) {
-        this.comments = comments;
-    }
-
 }
