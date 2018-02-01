@@ -74,7 +74,6 @@ class App extends Component {
               <MainView actions={this.actions} view={this.state.view}>
               </MainView>
           </div>
-
       </div>
     );
   }
