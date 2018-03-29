@@ -1,11 +1,10 @@
-import React, { Component } from 'react'
-import { PropTypes } from 'prop-types'
-import img from '../../public/ajax-loader.gif'
+import React, { Component } from 'react';
+import { PropTypes } from 'prop-types';
+import img from '../../public/ajax-loader.gif';
 
 export class SignStatus extends Component {
-
-  constructor (props) {
-    super(props)
+  constructor(props) {
+    super(props);
   }
 
   render() {
@@ -14,25 +13,24 @@ export class SignStatus extends Component {
         <div>
           {this.props.errText}
         </div>
-      )
+      );
     }
     if (this.props.status) {
       return (
         <div>
-          <img src='img'/>
+          <img src="img" />
         </div>
-      )
-  
+      );
     }
     return (
       <div>
-        <button type='submit'>{this.props.buttonText}</button>
-      </div>)
+        <button type="submit">{this.props.buttonText}</button>
+      </div>);
   }
 }
 
 SignStatus.propTypes = {
   errText: PropTypes.text,
   status: PropTypes.boolean,
-  buttonText: PropTypes.text
-}
+  buttonText: PropTypes.text,
+};

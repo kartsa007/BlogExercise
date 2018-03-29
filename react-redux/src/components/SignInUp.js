@@ -37,7 +37,7 @@ export class SignInUp extends Component {
   }
 
   errresponse(response) {
-    console.log(response)
+    console.log(response);
   }
 
   render() {
@@ -58,7 +58,7 @@ export class SignInUp extends Component {
 
 SignInUp.propTypes = {
   url: PropTypes.string.isRequired,
-  actions: PropTypes.object.isRequired
-}
+  actions: PropTypes.object.isRequired,
+};
 
 export default SignInUp;

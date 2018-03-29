@@ -1,17 +1,16 @@
-import React, { Component } from 'react'
-import { PropTypes } from 'prop-types'
+import React, { Component } from 'react';
+import { PropTypes } from 'prop-types';
 
 export class Comment extends Component {
-
   render() {
     return (
       <div>
         <p>{this.props.comment.comment}</p>
         <p>{this.props.comment.author}</p>
-      </div>)
+      </div>);
   }
 }
 
 Comment.propTypes = {
-  comment: PropTypes.object
-}
+  comment: PropTypes.object,
+};

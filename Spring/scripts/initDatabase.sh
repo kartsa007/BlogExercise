@@ -5,6 +5,7 @@ TABLES="DB/Taulut.txt"
 TABLES=$(dirname $(dirname $(realpath $0)))/$TABLES
 DB_USER="spring"
 PASSWD="spring"
+HOST="ArchKari"
 
 mysqlcmd() {
     args=""
@@ -37,12 +38,12 @@ initDb() {
 }
 
 createUser() {
-    mysqlcmd "CREATE USER '${DB_USER}'@'localhost' IDENTIFIED BY '${PASSWD}'"
-    mysqlcmd "GRANT SELECT,INSERT,UPDATE,DELETE,CREATE,DROP ON ${DB}.* TO '${DB_USER}'@'localhost'"
+    mysqlcmd "CREATE USER '${DB_USER}'@'${ArchKari}' IDENTIFIED BY '${PASSWD}'"
+    mysqlcmd "GRANT SELECT,INSERT,UPDATE,DELETE,CREATE,DROP ON ${DB}.* TO '${DB_USER}'@'${ArchKari}'"
 }
 
 dropUser() {
-    mysqlcmd "DROP USER '${USER}'@'localhost'"
+    mysqlcmd "DROP USER '${USER}'@'${ArchKari}'"
 }
 
 if [ $(dbExists) == "Yes" ] 
@@ -66,5 +67,5 @@ mysqlcmd "SHOW DATABASES LIKE '${DB}'" 2>&1
 #sudo mysql --execute "SHOW GRANTS"
 #sudo mysql --execute "SELECT User FROM mysql.user"
 #sudo mysql --execute "SELECT User, Host, Password FROM mysql.user"
-#sudo mysqladmin  -h localhost password \'mysql\'
+#sudo mysqladmin  -h ${ArchKari} password \'mysql\'
 #sudo mysql --execute "SELECT User, Host, Password FROM mysql.user"
