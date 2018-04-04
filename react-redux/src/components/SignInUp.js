@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Form, Text } from 'react-form';
 import { PropTypes } from 'prop-types';
-import { SignStatus } from './SignStatus';
-import { postData } from '../utils//Query';
+
+// import { postData } from '../utils//Query';
 
 export class SignInUp extends Component {
   constructor(props) {
@@ -41,6 +41,7 @@ export class SignInUp extends Component {
   }
 
   render() {
+    console.log('SignInUp');
     return (
       <Form>
         {formApi => (

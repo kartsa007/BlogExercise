@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Storage } from '../utils/Storage';
+// import { Storage } from '../utils/Storage';
 import { EditComment } from './EditComment';
 import { Comment } from './Comment';
-import { postData } from '../utils/Query';
+// import { postData } from '../utils/Query';
 
 export class Comments extends Component {
   constructor(props) {

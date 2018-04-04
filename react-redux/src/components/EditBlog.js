@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Blog } from './Blog';
-import { postData } from '../utils/Query';
-import { Storage } from '../utils/Storage';
+
+// import { postData } from '../utils/Query';
+// import { Storage } from '../utils/Storage';
 
 export class EditBlog extends Component {
   constructor(props) {
@@ -53,7 +53,7 @@ export class EditBlog extends Component {
 }
 
 EditBlog.propTypes = {
-  actions: PropTypes.object,
+  actions: PropTypes.object
 };
 
 export default EditBlog;

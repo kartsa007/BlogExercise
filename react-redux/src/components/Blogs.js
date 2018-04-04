@@ -1,5 +1,5 @@
 import React from 'react';
-import { Storage } from '../utils/Storage';
+// import { Storage } from '../utils/Storage';
 import { Blog } from './Blog';
 
 export class Blogs extends React.Component {

@@ -1,7 +1,8 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
 import { Comments } from './Comments';
-import { getData } from '../utils//Query';
+
+// import { getData } from '../utils//Query';
 
 export class Blog extends React.Component {
   constructor(props) {

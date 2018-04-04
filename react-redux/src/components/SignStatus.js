@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
-import img from '../../public/ajax-loader.gif';
 
 export class SignStatus extends Component {
   constructor(props) {

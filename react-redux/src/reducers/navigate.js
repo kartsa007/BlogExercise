@@ -8,7 +8,7 @@ export default function navigate(state = initialState, action) {
   switch (action.type) {
     case SIGN_IN:
       return {
-
+        
       };
     default:
       return state;
