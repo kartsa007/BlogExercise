@@ -36,10 +36,6 @@ export class SignInUp extends Component {
     }
   }
 
-  errresponse(response) {
-    console.log(response);
-  }
-
   render() {
     console.log('SignInUp');
     return (
@@ -56,10 +52,5 @@ export class SignInUp extends Component {
       </Form>);
   }
 }
-
-SignInUp.propTypes = {
-  url: PropTypes.string.isRequired,
-  actions: PropTypes.object.isRequired,
-};
 
 export default SignInUp;
